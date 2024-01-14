@@ -37,10 +37,10 @@ const Cadastro = () => {
     }
 
     createUserWithEmailAndPassword(auth, email, senha)
-      .then((credential) => {
+      .then(() => {
         CadastrarUsuario();
       })
-      .catch((err) => {
+      .catch(() => {
         erroMenssage();
       });
   }

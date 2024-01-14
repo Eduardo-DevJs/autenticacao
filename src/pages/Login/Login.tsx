@@ -37,7 +37,7 @@ const Login = () => {
     setSenha('');
 
     signInWithEmailAndPassword(auth, email, senha)
-      .then((userCredential) => {
+      .then(() => {
         toast.success('Usuario logado com sucesso!', {
           position: 'top-right',
           autoClose: 1000,
@@ -49,7 +49,7 @@ const Login = () => {
           theme: 'light',
         });
       })
-      .catch((error) => {
+      .catch(() => {
         erroMenssage();
       });
   }
