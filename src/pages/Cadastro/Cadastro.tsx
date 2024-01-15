@@ -19,7 +19,7 @@ const Cadastro = () => {
   const auth = getAuth(app);
   const db = getFirestore(app);
 
-  function AutenticacaoDeUsuario(e: FormEvent) {
+  async function AutenticacaoDeUsuario(e: FormEvent) {
     e.preventDefault();
 
     if (usuario.trim() === '' || email.trim() === '' || senha.trim() === '') {
@@ -36,7 +36,7 @@ const Cadastro = () => {
       return;
     }
 
-    createUserWithEmailAndPassword(auth, email, senha)
+    await createUserWithEmailAndPassword(auth, email, senha)
       .then(() => {
         CadastrarUsuario();
       })

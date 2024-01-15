@@ -6,8 +6,8 @@ import { FormEvent, useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import app from '../../services/FirebaseConnection';
 import Swal from 'sweetalert2';
-  import 'react-toastify/dist/ReactToastify.css';
-  import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
   const [email, setEmail] = useState<string>('');
@@ -15,7 +15,7 @@ const Login = () => {
 
   const auth = getAuth(app);
 
-  function EntrarNaConta(e: FormEvent) {
+  async function EntrarNaConta(e: FormEvent) {
     e.preventDefault();
 
     if (email.trim() === '' || senha.trim() === '') {
@@ -36,22 +36,26 @@ const Login = () => {
     setEmail('');
     setSenha('');
 
-    signInWithEmailAndPassword(auth, email, senha)
+    await signInWithEmailAndPassword(auth, email, senha)
       .then(() => {
-        toast.success('Usuario logado com sucesso!', {
-          position: 'top-right',
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        });
+        successMenssage();
       })
       .catch(() => {
         erroMenssage();
       });
+  }
+
+  function successMenssage() {
+    toast.success('Usuario logado com sucesso!', {
+      position: 'top-right',
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
   }
 
   function erroMenssage() {
@@ -84,7 +88,7 @@ const Login = () => {
             placeholder="********"
           />
 
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Entrar</Button>
 
           <span className="text-center">
             Não possui uma conta?{' '}
